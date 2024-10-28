@@ -61,3 +61,4 @@ client.on('offline', () => {
 client.on('close', () => {
   console.log('Conexión MQTT cerrada');
 });
+
