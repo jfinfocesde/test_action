@@ -1,4 +1,4 @@
-name: Ejemplo de Flujo de Trabajo
+name: Ejemplo de MQTT con Node.js
 
 on:
   push:
@@ -6,15 +6,19 @@ on:
       - main
 
 jobs:
-  saludar:
+  ejecutar-ejemplo:
     runs-on: ubuntu-latest
     steps:
-      - name: Saludar
-        run: echo "¡Hola, mundo!"
+      - name: Clonar repositorio
+        uses: actions/checkout@v3
 
-  despedirse:
-    runs-on: ubuntu-latest
-    needs: saludar
-    steps:
-      - name: Despedirse
-        run: echo "¡Adiós, mundo!"
+      - name: Instalar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18 # Puedes especificar la versión de Node.js que necesitas
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Ejecutar ejemplo
+        run: node mqtt_example.js
